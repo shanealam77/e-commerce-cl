@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyStore — Best Products, Best Prices</title>
+  <meta name="description" content="Shop the best products at amazing prices. Own products, digital downloads, and top affiliate deals.">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛍️</text></svg>">
+</head>
+<body>
+
+<!-- ============================================
+     NAVBAR
+     ============================================ -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">🛍️ <span class="store-name">MyStore</span></a>
+    <div class="nav-search">
+      <span>🔍</span>
+      <input type="text" placeholder="Search products...">
+      <button class="nav-search-btn">→</button>
+    </div>
+    <div class="nav-links" id="nav-links">
+      <a href="/" class="nav-link active">Home</a>
+      <a href="/products.html" class="nav-link">Products</a>
+      <a href="/products.html?type=digital" class="nav-link">Digital</a>
+      <a href="/products.html?type=affiliate" class="nav-link">Deals</a>
+    </div>
+    <a href="/cart.html" class="cart-btn">
+      🛒 Cart
+      <span class="cart-count" id="cart-count" style="display:none">0</span>
+    </a>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============================================
+     TRUST BANNER
+     ============================================ -->
+<div class="trust-banner">
+  <div class="trust-inner" id="trust-marquee">
+    <div class="trust-item">🚚 Free Delivery on orders above ₹999</div>
+    <div class="trust-item">🔒 100% Secure Payments</div>
+    <div class="trust-item">📦 Easy Returns & Refunds</div>
+    <div class="trust-item">⭐ 10,000+ Happy Customers</div>
+    <div class="trust-item">💳 EMI Available on orders ₹3000+</div>
+    <div class="trust-item">📱 24/7 WhatsApp Support</div>
+    <!-- Duplicate for seamless loop -->
+    <div class="trust-item">🚚 Free Delivery on orders above ₹999</div>
+    <div class="trust-item">🔒 100% Secure Payments</div>
+    <div class="trust-item">📦 Easy Returns & Refunds</div>
+    <div class="trust-item">⭐ 10,000+ Happy Customers</div>
+    <div class="trust-item">💳 EMI Available on orders ₹3000+</div>
+    <div class="trust-item">📱 24/7 WhatsApp Support</div>
+  </div>
+</div>
+
+<!-- ============================================
+     HERO SECTION
+     ============================================ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">⚡ New arrivals every week</div>
+      <h1 class="hero-title">
+        Shop Smarter,<br>
+        <span>Save Bigger</span>
+      </h1>
+      <p class="hero-desc">Discover amazing deals on our own handpicked products, digital downloads, and top affiliate offers — all in one place.</p>
+      <div class="hero-btns">
+        <a href="/products.html" class="btn-hero-primary">Shop Now 🛍️</a>
+        <a href="/products.html?type=digital" class="btn-hero-secondary">Digital Products 📥</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num" data-count="500" data-suffix="+">500+</div>
+          <div class="hero-stat-label">Products</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num" data-count="10000" data-suffix="+">10K+</div>
+          <div class="hero-stat-label">Customers</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">4.8★</div>
+          <div class="hero-stat-label">Rating</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image-area">
+      <div class="hero-image-card">
+        🛍️
+        <div class="hero-floating-card card1">
+          <div class="hfc-icon" style="background:#E0E7FF">📦</div>
+          <div>
+            <div>Order Delivered!</div>
+            <div style="color:#10B981;font-size:.75rem">Just now ✓</div>
+          </div>
+        </div>
+        <div class="hero-floating-card card2">
+          <div class="hfc-icon" style="background:#FEF3C7">⭐</div>
+          <div>
+            <div>4.9 Rating</div>
+            <div style="color:#6B7280;font-size:.75rem">2,400+ reviews</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FEATURES STRIP
+     ============================================ -->
+<section class="features-strip">
+  <div class="container">
+    <div class="features-grid stagger-children">
+      <div class="feature-item">
+        <div class="feature-icon">🚚</div>
+        <div>
+          <div class="feature-title">Free Delivery</div>
+          <div class="feature-desc">On all orders above ₹999 within India</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔒</div>
+        <div>
+          <div class="feature-title">Secure Payment</div>
+          <div class="feature-desc">100% safe with Razorpay encryption</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">📥</div>
+        <div>
+          <div class="feature-title">Instant Downloads</div>
+          <div class="feature-desc">Digital products delivered instantly</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">💬</div>
+        <div>
+          <div class="feature-title">WhatsApp Support</div>
+          <div class="feature-desc">24/7 support on WhatsApp & Email</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FEATURED PRODUCTS
+     ============================================ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">🔥 Hot Right Now</div>
+      <h2 class="section-title">Featured Products</h2>
+      <p class="section-desc">Hand-picked deals and bestsellers you'll love</p>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="category-tabs reveal" id="home-cat-tabs">
+      <button class="cat-tab active" data-type="all">All Products</button>
+      <button class="cat-tab" data-type="own">Our Products</button>
+      <button class="cat-tab" data-type="affiliate">Top Deals</button>
+      <button class="cat-tab" data-type="digital">Digital</button>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid" id="featured-products">
+      <div class="spinner"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:40px">
+      <a href="/products.html" class="btn-hero-primary" style="display:inline-block">View All Products →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CATEGORIES SECTION
+     ============================================ -->
+<section class="section section-gray">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Browse</div>
+      <h2 class="section-title">Shop by Category</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px" id="categories-grid">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     DIGITAL PRODUCTS HIGHLIGHT
+     ============================================ -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label" style="background:rgba(129,140,248,.2);color:#818CF8">📥 Digital Store</div>
+      <h2 class="section-title" style="color:#F1F5F9">Instant Digital Downloads</h2>
+      <p class="section-desc" style="color:#94A3B8">eBooks, courses, templates & more. Buy once, download forever.</p>
+    </div>
+    <div class="products-grid" id="digital-products">
+      <div class="spinner"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     TESTIMONIALS
+     ============================================ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">💬 Reviews</div>
+      <h2 class="section-title">What Customers Say</h2>
+    </div>
+    <div class="testimonials-grid stagger-children">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Absolutely love the quality! Got my order in 2 days and the product exceeded my expectations. Will definitely order again!"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">R</div>
+          <div>
+            <div class="testimonial-name">Rahul Sharma</div>
+            <div class="testimonial-role">Delhi, India</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"The digital marketing eBook was a game changer for my business. Super detailed and practical. Worth every rupee!"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">P</div>
+          <div>
+            <div class="testimonial-name">Priya Verma</div>
+            <div class="testimonial-role">Mumbai, India</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★☆</div>
+        <p class="testimonial-text">"Great prices compared to other sites. Customer support was very helpful when I had a question about my order. Highly recommend!"</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">A</div>
+          <div>
+            <div class="testimonial-name">Amit Patel</div>
+            <div class="testimonial-role">Ahmedabad, India</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     NEWSLETTER
+     ============================================ -->
+<section class="newsletter">
+  <div class="container">
+    <h2 class="newsletter-title">🎁 Get Exclusive Deals</h2>
+    <p class="newsletter-desc">Subscribe to get special offers, free giveaways, and new product alerts!</p>
+    <div class="newsletter-form">
+      <input type="email" class="newsletter-input" placeholder="Enter your email address">
+      <button class="newsletter-btn" onclick="subscribeNewsletter(this)">Subscribe →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">🛍️ <span class="store-name">MyStore</span></div>
+        <p class="footer-desc">Your one-stop destination for the best products, digital downloads, and exclusive deals. Shop with confidence!</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social">📘</a>
+          <a href="#" class="footer-social">📸</a>
+          <a href="#" class="footer-social">💬</a>
+          <a href="#" class="footer-social">🐦</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Shop</div>
+        <a href="/products.html" class="footer-link">All Products</a>
+        <a href="/products.html?type=own" class="footer-link">Our Products</a>
+        <a href="/products.html?type=digital" class="footer-link">Digital Downloads</a>
+        <a href="/products.html?type=affiliate" class="footer-link">Top Deals</a>
+      </div>
+      <div>
+        <div class="footer-heading">Support</div>
+        <a href="#" class="footer-link">Track Order</a>
+        <a href="#" class="footer-link">Return Policy</a>
+        <a href="#" class="footer-link">Privacy Policy</a>
+        <a href="#" class="footer-link">Terms of Service</a>
+      </div>
+      <div>
+        <div class="footer-heading">Contact</div>
+        <a href="#" class="footer-link">📧 support@mystore.com</a>
+        <a href="#" class="footer-link">💬 WhatsApp Us</a>
+        <a href="#" class="footer-link">📍 India</a>
+        <div style="margin-top:16px">
+          <div class="footer-heading">Admin</div>
+          <a href="/admin.html" class="footer-link">🔐 Admin Panel</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-text">© 2025 <span class="store-name">MyStore</span>. All rights reserved. Made with ❤️ in India.</div>
+      <div class="footer-badges">
+        <span class="payment-badge">💳 Razorpay</span>
+        <span class="payment-badge">📱 UPI</span>
+        <span class="payment-badge">🏦 Net Banking</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast Container -->
+<div id="toast-container" class="toast-container"></div>
+
+<script src="/js/main.js"></script>
+<script>
+// ============================================
+// HOMEPAGE LOGIC
+// ============================================
+let allProducts = [];
+let currentFilter = "all";
+
+async function loadFeaturedProducts(type = "all") {
+  const container = document.getElementById("featured-products");
+  container.innerHTML = '<div class="spinner"></div>';
+  try {
+    const params = type !== "all" ? { type } : {};
+    allProducts = await fetchProducts(params);
+    if (allProducts.length === 0) {
+      container.innerHTML = '<p style="text-align:center;color:var(--text3);padding:40px">No products found.</p>';
+      return;
+    }
+    container.innerHTML = allProducts.slice(0, 6).map((p, i) => renderProductCard(p, i * 0.07)).join("");
+    if (typeof initScrollReveal === "function") initScrollReveal();
+  } catch (e) {
+    container.innerHTML = '<p style="text-align:center;color:red;padding:40px">Error loading products. Make sure server is running!</p>';
+  }
+}
+
+async function loadDigitalProducts() {
+  const container = document.getElementById("digital-products");
+  try {
+    const products = await fetchProducts({ type: "digital" });
+    container.innerHTML = products.length
+      ? products.slice(0, 3).map((p, i) => renderProductCard(p, i * 0.08)).join("")
+      : '<p style="text-align:center;color:#94A3B8;padding:40px">No digital products yet.</p>';
+    if (typeof initScrollReveal === "function") initScrollReveal();
+  } catch {
+    container.innerHTML = '<p style="text-align:center;color:red">Error loading products.</p>';
+  }
+}
+
+function loadCategories() {
+  const cats = [
+    { emoji: "📱", name: "Electronics" },
+    { emoji: "👗", name: "Fashion" },
+    { emoji: "🏋️", name: "Fitness" },
+    { emoji: "🏠", name: "Home Decor" },
+    { emoji: "📚", name: "Digital Products" },
+    { emoji: "💄", name: "Beauty" },
+  ];
+  document.getElementById("categories-grid").innerHTML = cats.map(c => `
+    <a href="/products.html?category=${encodeURIComponent(c.name)}" class="cat-card reveal">
+      <span class="cat-emoji">${c.emoji}</span>
+      <span class="cat-name">${c.name}</span>
+    </a>
+  `).join("");
+  initScrollReveal();
+}
+
+// Category Tab Filter
+document.getElementById("home-cat-tabs").addEventListener("click", (e) => {
+  const tab = e.target.closest(".cat-tab");
+  if (!tab) return;
+  document.querySelectorAll("#home-cat-tabs .cat-tab").forEach(t => t.classList.remove("active"));
+  tab.classList.add("active");
+  loadFeaturedProducts(tab.dataset.type);
+});
+
+// Newsletter
+function subscribeNewsletter(btn) {
+  const input = btn.previousElementSibling;
+  if (!input.value.includes("@")) { toast("Please enter a valid email!", "error"); return; }
+  toast("🎉 Subscribed successfully! Check your inbox.", "success");
+  input.value = "";
+}
+
+// Init
+loadFeaturedProducts();
+loadDigitalProducts();
+loadCategories();
+</script>
+</body>
+</html>

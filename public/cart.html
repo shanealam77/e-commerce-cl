@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart — MyStore</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">🛍️ <span class="store-name">MyStore</span></a>
+    <div class="nav-search">
+      <span>🔍</span>
+      <input type="text" placeholder="Search products...">
+      <button class="nav-search-btn">→</button>
+    </div>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/products.html" class="nav-link">Products</a>
+      <a href="/products.html?type=digital" class="nav-link">Digital</a>
+      <a href="/products.html?type=affiliate" class="nav-link">Deals</a>
+    </div>
+    <a href="/cart.html" class="cart-btn">
+      🛒 Cart
+      <span class="cart-count" id="cart-count" style="display:none">0</span>
+    </a>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>🛒 Your Cart</h1>
+  <p>Review your items and checkout</p>
+  <div class="breadcrumb">
+    <a href="/">Home</a> <span>›</span> <span>Cart</span>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div id="empty-cart" class="empty-cart" style="display:none">
+      <div class="empty-cart-icon">🛒</div>
+      <h3>Your cart is empty!</h3>
+      <p>Looks like you haven't added anything yet.</p>
+      <a href="/products.html" class="btn-hero-primary" style="display:inline-block">Start Shopping →</a>
+    </div>
+
+    <div class="cart-layout" id="cart-layout">
+      <!-- Cart Items -->
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+          <h2 style="font-size:1.3rem;font-weight:800">Cart Items (<span id="item-count">0</span>)</h2>
+          <button onclick="clearCart()" style="color:var(--danger);font-size:.9rem;font-weight:600;background:none;border:none;cursor:pointer">🗑️ Clear All</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="cart-summary">
+        <h3>Order Summary</h3>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="subtotal">₹0</span>
+        </div>
+        <div class="summary-row">
+          <span>Delivery</span>
+          <span id="delivery-cost" style="color:var(--success)">Free</span>
+        </div>
+        <div class="summary-row" id="discount-row" style="display:none;color:var(--success)">
+          <span>Discount</span>
+          <span id="discount-amount">-₹0</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span class="price" id="total-amount">₹0</span>
+        </div>
+
+        <!-- Coupon -->
+        <div class="coupon-input">
+          <input type="text" id="coupon-input" placeholder="Coupon code">
+          <button onclick="applyCoupon()">Apply</button>
+        </div>
+        <div id="coupon-msg" style="font-size:.8rem;margin-top:4px"></div>
+
+        <button class="checkout-btn" onclick="openCheckout()">
+          🔒 Proceed to Checkout
+        </button>
+        <div class="safe-badge">🔒 Secure Payment by Razorpay</div>
+
+        <!-- WhatsApp Order Option -->
+        <button onclick="whatsappOrder()" style="width:100%;margin-top:10px;padding:12px;border-radius:12px;background:#25D366;color:#fff;font-weight:700;font-size:.95rem;border:none;cursor:pointer;transition:var(--transition)" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">
+          💬 Order via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CHECKOUT MODAL
+     ============================================ -->
+<div class="modal-overlay" id="checkout-modal">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-header">
+      <h3>🔒 Checkout</h3>
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="checkout-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Full Name *</label>
+          <input type="text" class="form-control" id="co-name" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone *</label>
+          <input type="tel" class="form-control" id="co-phone" placeholder="+91 XXXXX XXXXX">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Email *</label>
+          <input type="email" class="form-control" id="co-email" placeholder="your@email.com">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Delivery Address *</label>
+          <textarea class="form-control" id="co-address" rows="3" placeholder="House No., Street, City, State, PIN"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">City *</label>
+          <input type="text" class="form-control" id="co-city" placeholder="City">
+        </div>
+        <div class="form-group">
+          <label class="form-label">PIN Code *</label>
+          <input type="text" class="form-control" id="co-pin" placeholder="123456">
+        </div>
+      </div>
+
+      <div style="background:var(--bg2);border-radius:10px;padding:16px;margin-top:8px">
+        <div style="font-weight:700;margin-bottom:10px">Order Summary</div>
+        <div id="checkout-items-list" style="font-size:.9rem;color:var(--text2);margin-bottom:10px"></div>
+        <div style="border-top:1px solid var(--border);padding-top:10px;display:flex;justify-content:space-between;font-weight:800">
+          <span>Total Amount:</span>
+          <span style="color:var(--primary)" id="checkout-total">₹0</span>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:8px">
+        <button class="btn-cancel" style="flex:1" onclick="closeCheckout()">Cancel</button>
+        <button onclick="placeOrder()" style="flex:2;padding:13px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;font-weight:800;font-size:1rem;border:none;cursor:pointer">
+          💳 Pay ₹<span id="pay-amount">0</span>
+        </button>
+      </div>
+      <p style="font-size:.78rem;color:var(--text3);text-align:center;margin-top:8px">🔒 Your info is safe and encrypted</p>
+    </div>
+  </div>
+</div>
+
+<!-- Order Success Modal -->
+<div class="modal-overlay" id="success-modal">
+  <div class="modal" style="max-width:400px;text-align:center">
+    <div style="font-size:4rem;margin-bottom:20px">🎉</div>
+    <h2 style="font-size:1.6rem;font-weight:800;margin-bottom:12px">Order Placed!</h2>
+    <p style="color:var(--text2);margin-bottom:8px">Your order has been placed successfully.</p>
+    <p style="font-size:.9rem;color:var(--text3);margin-bottom:24px" id="order-id-text">Order ID: —</p>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <a href="/products.html" style="display:block;padding:12px;border-radius:10px;background:var(--primary);color:#fff;font-weight:700">Continue Shopping →</a>
+      <button onclick="document.getElementById('success-modal').classList.remove('open')" style="padding:12px;border-radius:10px;background:var(--bg2);font-weight:600;cursor:pointer;border:none">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container" class="toast-container"></div>
+
+<script src="/js/main.js"></script>
+<script>
+let appliedDiscount = 0;
+const COUPONS = { "SAVE10": 10, "WELCOME20": 20, "DEAL50": 50 };
+
+function renderCart() {
+  const cart = Cart.get();
+  const layout = document.getElementById("cart-layout");
+  const empty = document.getElementById("empty-cart");
+
+  if (cart.length === 0) {
+    layout.style.display = "none";
+    empty.style.display = "block";
+    return;
+  }
+  layout.style.display = "grid";
+  empty.style.display = "none";
+
+  document.getElementById("item-count").textContent = cart.length;
+  document.getElementById("cart-items").innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <img src="${item.image}" class="cart-item-img" alt="${item.name}" onerror="this.src='https://via.placeholder.com/100'">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-cat">${item.category} • ${item.type === "digital" ? "📥 Digital" : item.type === "affiliate" ? "🔗 Affiliate" : "📦 Physical"}</div>
+        <div class="cart-item-controls">
+          ${item.type !== "digital" ? `
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty('${item.id}', ${item.qty - 1})">−</button>
+            <span class="qty-val">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty('${item.id}', ${item.qty + 1})">+</button>
+          </div>` : `<span style="font-size:.85rem;color:var(--text3)">Digital Download</span>`}
+          <button class="cart-item-remove" onclick="removeItem('${item.id}')">🗑️ Remove</button>
+        </div>
+      </div>
+      <div class="cart-item-price">₹${(item.price * item.qty).toLocaleString()}</div>
+    </div>
+  `).join("");
+  updateTotals();
+}
+
+function updateTotals() {
+  const subtotal = Cart.total();
+  const delivery = subtotal >= 999 ? 0 : 49;
+  const discount = Math.round(subtotal * appliedDiscount / 100);
+  const total = subtotal + delivery - discount;
+
+  document.getElementById("subtotal").textContent = `₹${subtotal.toLocaleString()}`;
+  document.getElementById("delivery-cost").textContent = delivery === 0 ? "Free 🎉" : `₹${delivery}`;
+  document.getElementById("delivery-cost").style.color = delivery === 0 ? "var(--success)" : "var(--text)";
+  document.getElementById("total-amount").textContent = `₹${total.toLocaleString()}`;
+
+  if (appliedDiscount > 0) {
+    document.getElementById("discount-row").style.display = "flex";
+    document.getElementById("discount-amount").textContent = `-₹${discount.toLocaleString()}`;
+  }
+  return { subtotal, delivery, discount, total };
+}
+
+function changeQty(id, qty) {
+  Cart.updateQty(id, qty);
+  renderCart();
+}
+function removeItem(id) {
+  Cart.remove(id);
+  renderCart();
+  toast("Item removed from cart", "info");
+}
+function clearCart() {
+  if (confirm("Clear all items from cart?")) {
+    Cart.clear();
+    renderCart();
+  }
+}
+function applyCoupon() {
+  const code = document.getElementById("coupon-input").value.trim().toUpperCase();
+  const msg = document.getElementById("coupon-msg");
+  if (COUPONS[code]) {
+    appliedDiscount = COUPONS[code];
+    msg.textContent = `✅ Coupon applied! ${appliedDiscount}% discount`;
+    msg.style.color = "var(--success)";
+    updateTotals();
+    toast(`${appliedDiscount}% discount applied! 🎉`, "success");
+  } else {
+    msg.textContent = "❌ Invalid coupon code";
+    msg.style.color = "var(--danger)";
+  }
+}
+function openCheckout() {
+  const cart = Cart.get();
+  if (!cart.length) { toast("Cart is empty!", "error"); return; }
+  const { total } = updateTotals();
+  document.getElementById("checkout-items-list").innerHTML = cart.map(i =>
+    `<div style="display:flex;justify-content:space-between;margin-bottom:6px"><span>${i.name} ×${i.qty}</span><span>₹${(i.price * i.qty).toLocaleString()}</span></div>`
+  ).join("");
+  document.getElementById("checkout-total").textContent = `₹${total.toLocaleString()}`;
+  document.getElementById("pay-amount").textContent = total.toLocaleString();
+  document.getElementById("checkout-modal").classList.add("open");
+}
+function closeCheckout() {
+  document.getElementById("checkout-modal").classList.remove("open");
+}
+async function placeOrder() {
+  const name = document.getElementById("co-name").value.trim();
+  const phone = document.getElementById("co-phone").value.trim();
+  const email = document.getElementById("co-email").value.trim();
+  const address = document.getElementById("co-address").value.trim();
+  const city = document.getElementById("co-city").value.trim();
+  const pin = document.getElementById("co-pin").value.trim();
+
+  if (!name || !phone || !email || !address || !city || !pin) {
+    toast("Please fill all required fields!", "error"); return;
+  }
+  if (!email.includes("@")) { toast("Invalid email!", "error"); return; }
+
+  const { total, delivery, discount } = updateTotals();
+  const btn = event.target;
+  btn.textContent = "Processing..."; btn.disabled = true;
+
+  try {
+    const res = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        customer: { name, phone, email, address, city, pin },
+        items: Cart.get(),
+        subtotal: Cart.total(),
+        delivery,
+        discount,
+        total,
+        coupon: appliedDiscount > 0 ? document.getElementById("coupon-input").value.trim() : null,
+      })
+    });
+    const data = await res.json();
+    closeCheckout();
+    Cart.clear();
+    renderCart();
+    document.getElementById("order-id-text").textContent = `Order ID: ${data.orderId}`;
+    document.getElementById("success-modal").classList.add("open");
+  } catch (e) {
+    toast("Something went wrong. Please try again!", "error");
+    btn.textContent = `💳 Pay ₹${total.toLocaleString()}`; btn.disabled = false;
+  }
+}
+function whatsappOrder() {
+  const cart = Cart.get();
+  if (!cart.length) { toast("Cart is empty!", "error"); return; }
+  const { total } = updateTotals();
+  let msg = "🛒 *New Order Request*\n\n";
+  cart.forEach(i => msg += `• ${i.name} ×${i.qty} = ₹${(i.price * i.qty).toLocaleString()}\n`);
+  msg += `\n💰 *Total: ₹${total.toLocaleString()}*\n\nPlease confirm my order!`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, "_blank");
+}
+
+renderCart();
+</script>
+</body>
+</html>
